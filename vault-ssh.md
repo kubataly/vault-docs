@@ -2,7 +2,7 @@
 The Vault SSH secrets engine provides secure authentication and authorization for access to machines via the SSH protocol. The Vault SSH secrets engine helps manage access to machine infrastructure, providing several ways to issue SSH credentials.
 
 # Risks with SSH Key Based Authentication
- Let’s begin by reviewing the limitations of SSH key-based authentication and what problems we are trying to solve:
+ Let’s see the limitations of SSH key-based authentication and what problems we are trying to solve:
 
 - __Risk of private key compromise:__ Users will sometimes mishandle private keys, intentionally or unintentionally exposing them to other users or placing them in insecure locations.
 - __Key rotation:__ Revoking private keys is a complex operation. How do you ensure that all copies of the private key are accounted for? What happens when administrators who have made copies of private keys leave the company?
@@ -21,3 +21,5 @@ __The numbers in the diagram represent the following steps:__
 4. Vault signs the SSH key and return the SSH certificate to the user.
 5. User initiates SSH connection using the SSH certificate.
 6. Host verifies the client SSH certificate is signed by the trusted SSH CA and allows connection.
+
+> `ttl:` This is where certificate expiry is set when signing an SSH key. Once the certificate expires, a user must authenticate to Vault and request another signed SSH certificate.
